@@ -1,17 +1,17 @@
 package executable;
 
-import model.Acteur;
 import model.Film;
-import model.Genre;
 import model.Lieu;
 import model.Pays;
-import model.Realisateur;
 import model.Role;
+import model.Genre;
+import model.Acteur;
+import model.Realisateur;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
+import java.util.Date;
+import java.util.Arrays;
+import java.util.ArrayList;
 
 import jakarta.persistence.EntityManager;
 
