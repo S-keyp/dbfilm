@@ -97,15 +97,6 @@ public class App {
 
         em.getTransaction().begin();
 
-        // em.persist(acteur);
-        // em.persist(role);
-        // em.persist(role2);
-        // em.persist(pays);
-        // em.persist(lieu);
-        // em.persist(real1);
-        // em.persist(real2);
-        // em.persist(real3);
-        em.persist(genre);
         em.persist(film);
 
         em.getTransaction().commit();
