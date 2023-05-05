@@ -1,6 +1,15 @@
 package model;
 
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumn;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,6 +23,9 @@ public class Realisateur {
 	private String identite;
 	
 	private String url;
+
+	@ManyToMany(mappedBy = "realisateurs")
+	private List<Film> films = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -37,5 +49,13 @@ public class Realisateur {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	public List<Film> getFilms() {
+		return films;
+	}
+
+	public void setFilms(List<Film> films) {
+		this.films = films;
 	}
 }

@@ -1,38 +1,57 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
 
 @Entity
 public class Film {
     @Id
-    private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private String title;
+	@Column(unique = true)
+	private String ref;
+
+	@ManyToOne
+	@JoinColumn(name="id_pays")
+	private Pays pays;
+	
+	@ManyToOne
+	@JoinColumn(name="id_lieu")
+	private Lieu lieu;
+
+	@ManyToMany
+    private List<Realisateur> realisateurs = new ArrayList<>();
+
+	// private List<Role> casting;
+
+	private String title;
 
     private String url;
     
     private String plot;
 
-    private String langue;
-
-    private String lieu;
-
-    private String realisateur;
-
-    private String castingPrincipal;
+    private String langue;    
 
     private Date anneeSortie;
 
-	
-
-    public String getId() {
+    public Long getId() {
 		return id;
 	}
 
-    public void setId(String id) {
+    public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -68,29 +87,37 @@ public class Film {
 		this.langue = langue;
 	}
 
-	public String getLieu() {
+	public Lieu getLieu() {
 		return lieu;
 	}
 
-	public void setLieu(String lieu) {
+	public void setLieu(Lieu lieu) {
 		this.lieu = lieu;
 	}
 
-	public String getRealisateur() {
-		return realisateur;
+	public Pays getPays() {
+		return pays;
 	}
 
-	public void setRealisateur(String realisateur) {
-		this.realisateur = realisateur;
+	public void setPays(Pays pays) {
+		this.pays = pays;
 	}
 
-	public String getCastingPrincipal() {
-		return castingPrincipal;
+	public List<Realisateur> getRealisateurs() {
+		return realisateurs;
 	}
 
-	public void setCastingPrincipal(String castingPrincipal) {
-		this.castingPrincipal = castingPrincipal;
+	public void setRealisateurs(List<Realisateur> realisateurs) {
+		this.realisateurs = realisateurs;
 	}
+
+	// public List<Role> getCasting() {
+	// 	return casting;
+	// }
+
+	// public void setasting(List<Role> casting) {
+	// 	this.casting = casting;
+	// }
 
 	public Date getAnneeSortie() {
 		return anneeSortie;

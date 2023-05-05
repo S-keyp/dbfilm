@@ -13,7 +13,7 @@ public class Role {
 	
 	private String nomPersonnage;
 	
-	private String film;
+	// private Film film;
 	
 	private String acteur;
 
@@ -33,13 +33,13 @@ public class Role {
 		this.nomPersonnage = nomPersonnage;
 	}
 
-	public String getFilm() {
-		return film;
-	}
+	// public Film getFilm() {
+	// 	return film;
+	// }
 
-	public void setFilm(String film) {
-		this.film = film;
-	}
+	// public void setFilm(Film film) {
+	// 	this.film = film;
+	// }
 
 	public String getActeur() {
 		return acteur;
