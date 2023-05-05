@@ -1,12 +1,11 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import java.util.ArrayList;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
