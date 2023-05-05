@@ -1,14 +1,22 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
 @Entity
 public class Acteur {
 	@Id
-	private String id;
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	private Long id;
+	
+	private String refActeur;
 	
 	private String identite;
 	
@@ -20,14 +28,23 @@ public class Acteur {
 	
 	private Float height;
 	
-	private String roles;
+	@OneToMany(mappedBy = "acteur")
+	private List<Role> roles = new ArrayList<>();
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getrefActeur() {
+		return refActeur;
+	}
+
+	public void setId(String refActeur) {
+		this.refActeur = refActeur;
 	}
 
 	public String getIdentite() {
@@ -70,11 +87,11 @@ public class Acteur {
 		this.height = height;
 	}
 
-	public String getRoles() {
+	public List<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(String roles) {
+	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
 }

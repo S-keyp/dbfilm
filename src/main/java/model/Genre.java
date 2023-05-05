@@ -1,6 +1,11 @@
 package model;
 
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,7 +18,8 @@ public class Genre {
 	
 	private String nom;
 	
-	private String film;
+	@ManyToMany(mappedBy = "genres")
+	private List<Film> films = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -31,11 +37,11 @@ public class Genre {
 		this.nom = nom;
 	}
 
-	public String getFilm() {
-		return film;
+	public List<Film> getFilms() {
+		return films;
 	}
 
-	public void setFilm(String film) {
-		this.film = film;
+	public void setFilms(List<Film> films) {
+		this.films = films;
 	}
 }

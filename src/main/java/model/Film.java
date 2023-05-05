@@ -9,6 +9,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,18 +26,22 @@ public class Film {
 	@Column(unique = true)
 	private String ref;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="id_pays")
 	private Pays pays;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="id_lieu")
 	private Lieu lieu;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.PERSIST)
     private List<Realisateur> realisateurs = new ArrayList<>();
+	
+	@ManyToMany(cascade = CascadeType.PERSIST)
+    private List<Genre> genres = new ArrayList<>();
 
-	// private List<Role> casting;
+	@OneToMany(mappedBy = "film", cascade = CascadeType.PERSIST)
+	private List<Role> casting = new ArrayList<>();
 
 	private String title;
 
@@ -111,13 +117,13 @@ public class Film {
 		this.realisateurs = realisateurs;
 	}
 
-	// public List<Role> getCasting() {
-	// 	return casting;
-	// }
+	public List<Role> getCasting() {
+		return casting;
+	}
 
-	// public void setasting(List<Role> casting) {
-	// 	this.casting = casting;
-	// }
+	public void setCasting(List<Role> casting) {
+		this.casting = casting;
+	}
 
 	public Date getAnneeSortie() {
 		return anneeSortie;
@@ -125,5 +131,13 @@ public class Film {
 
 	public void setAnneeSortie(Date anneeSortie) {
 		this.anneeSortie = anneeSortie;
+	}
+	
+	public List<Genre> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(List<Genre> genres) {
+		this.genres = genres;
 	}
 }

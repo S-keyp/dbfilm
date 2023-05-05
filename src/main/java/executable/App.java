@@ -1,25 +1,66 @@
 package executable;
 
+import model.Acteur;
 import model.Film;
+import model.Genre;
 import model.Lieu;
 import model.Pays;
 import model.Realisateur;
+import model.Role;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.EntityManager;
 
 public class App {
     public static void main(String[] args) {
-        EntityManager em = JPAUtils.getInstance().getEntityManager();
-
+        EntityManager em = JPAUtils.getInstance().getEntityManager();     
+        
         Film film = new Film();
         film.setTitle("tchoinnnnnn");
         film.setUrl("http://sdfqsdf");
         
+        List<Film> filmList = new ArrayList<>(
+            Arrays.asList(
+                film, film
+            )
+        );
         
+        Genre genre = new Genre();
+        genre.setNom("Ce genre de tchoin");
+        // genre.setFilms(filmList);
+        
+        List<Genre> genres = new ArrayList<>(
+            Arrays.asList(
+                genre, genre
+            )
+        );
+        film.setGenres(genres);
+
+
+        Acteur acteur = new Acteur();
+        acteur.setIdentite("Sacha Baron Cohen");
+        acteur.setDateNaissance(new Date());
+        acteur.setLieuNaissance("La zone sur Saone");
+
+
+        Role role = new Role();
+        role.setNomPersonnage("Luke Skywalker");
+        role.setActeur(acteur);
+        role.setFilm(film);
+        Role role2 = new Role();
+        role2.setNomPersonnage("Dark Vador");
+        role2.setActeur(acteur);
+        role2.setFilm(film);
+        List<Role> roles = new ArrayList<>();
+        roles.add(role);
+        roles.add(role2);
+
+        film.setCasting(roles);
+
         Lieu lieu = new Lieu();
         lieu.setEtatDept("EtatDept");
         lieu.setPays("Le Schlaguistant");
@@ -56,11 +97,15 @@ public class App {
 
         em.getTransaction().begin();
 
-        em.persist(pays);
-        em.persist(lieu);
-        em.persist(real1);
-        em.persist(real2);
-        em.persist(real3);
+        // em.persist(acteur);
+        // em.persist(role);
+        // em.persist(role2);
+        // em.persist(pays);
+        // em.persist(lieu);
+        // em.persist(real1);
+        // em.persist(real2);
+        // em.persist(real3);
+        em.persist(genre);
         em.persist(film);
 
         em.getTransaction().commit();

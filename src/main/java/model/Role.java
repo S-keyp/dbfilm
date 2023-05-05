@@ -1,6 +1,9 @@
 package model;
 
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,9 +16,13 @@ public class Role {
 	
 	private String nomPersonnage;
 	
-	// private Film film;
+	@ManyToOne 
+	@JoinColumn(name="id_film")
+	private Film film;
 	
-	private String acteur;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name="id_acteur")
+	private Acteur acteur;
 
 	public Long getId() {
 		return id;
@@ -33,19 +40,19 @@ public class Role {
 		this.nomPersonnage = nomPersonnage;
 	}
 
-	// public Film getFilm() {
-	// 	return film;
-	// }
+	public Film getFilm() {
+		return film;
+	}
 
-	// public void setFilm(Film film) {
-	// 	this.film = film;
-	// }
+	public void setFilm(Film film) {
+		this.film = film;
+	}
 
-	public String getActeur() {
+	public Acteur getActeur() {
 		return acteur;
 	}
 
-	public void setActeur(String acteur) {
+	public void setActeur(Acteur acteur) {
 		this.acteur = acteur;
 	}
 }
