@@ -12,7 +12,7 @@ public class App {
 
         em.getTransaction().begin();
 
-        em.persist(film);
+        // em.persist(film);
 
         em.getTransaction().commit();
 

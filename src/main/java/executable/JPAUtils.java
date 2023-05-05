@@ -9,7 +9,7 @@ public class JPAUtils {
 
     private JPAUtils(){}
   
-    private final static EntityManagerFactory EMF = Persistence.createEntityManagerFactory("FormationJPAPU");
+    private final static EntityManagerFactory EMF = Persistence.createEntityManagerFactory("dbfilm");
     private final static EntityManager EM = EMF.createEntityManager();
 
     public static JPAUtils getInstance(){
