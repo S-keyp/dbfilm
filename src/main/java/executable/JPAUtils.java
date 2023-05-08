@@ -6,8 +6,6 @@ import jakarta.persistence.EntityManagerFactory;
 
 public class JPAUtils {
     private static JPAUtils INSTANCE = new JPAUtils();
-
-    private JPAUtils(){}
   
     private final static EntityManagerFactory EMF = Persistence.createEntityManagerFactory("dbfilm");
     private final static EntityManager EM = EMF.createEntityManager();
@@ -19,6 +17,4 @@ public class JPAUtils {
     public static EntityManager getEntityManager(){
         return EM;
     }
-    
-
 }
