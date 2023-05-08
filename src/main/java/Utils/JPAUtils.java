@@ -1,4 +1,4 @@
-package executable;
+package Utils;
 
 import jakarta.persistence.Persistence;
 import jakarta.persistence.EntityManager;

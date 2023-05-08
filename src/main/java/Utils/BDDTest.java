@@ -1,4 +1,4 @@
-package executable;
+package Utils;
 
 import model.Film;
 import model.Lieu;
@@ -10,6 +10,7 @@ import model.Realisateur;
 
 import java.util.List;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.ArrayList;
@@ -58,12 +59,14 @@ public class BDDTest {
         //CREATION ACTEURS
         Acteur acteurSacha = new Acteur();
         acteurSacha.setIdentite("Sacha Baron Cohen");
-        acteurSacha.setDateNaissance(new Date());
         acteurSacha.setLieuNaissance("Hammersmith, Londres, Royaume-Uni");
+        GregorianCalendar sachaCal = new GregorianCalendar(1971,9,13);
+        acteurSacha.setDateNaissance(sachaCal.getTime());
         Acteur acteurJason = new Acteur();
         acteurJason.setIdentite("Jason Mantzoukas");
-        acteurJason.setDateNaissance(new Date());
         acteurJason.setLieuNaissance("Nahant, Massachusetts, États-Unis");
+        GregorianCalendar jasonCal = new GregorianCalendar(1972,11,18);
+        acteurJason.setDateNaissance(jasonCal.getTime());
 
 
         //CREATION LIST ROLES
