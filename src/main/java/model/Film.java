@@ -30,6 +30,7 @@ public class Film {
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="id_lieu")
+	@JsonProperty("lieuTournage")
 	private Lieu lieu;
 
 	@ManyToMany(cascade = CascadeType.PERSIST)
@@ -41,6 +42,7 @@ public class Film {
 	@OneToMany(mappedBy = "film", cascade = CascadeType.PERSIST)
 	private List<Role> roles = new ArrayList<>();
 
+	@JsonProperty("nom")
 	private String title;
 
     private String url;

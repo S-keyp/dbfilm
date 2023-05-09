@@ -2,9 +2,13 @@ package model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import jakarta.persistence.Id;
 import jakarta.persistence.Embedded;
@@ -17,6 +21,7 @@ import jakarta.persistence.OneToMany;
 public class Acteur {
 	@Id
 	private String id;
+
 	
 	private String identite;
 	
@@ -77,4 +82,11 @@ public class Acteur {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
+
+	// @JsonProperty("naissance")
+	// private void unpackNameFromNestedObject(Map<String, String> naissance) throws ParseException {
+	// 	lieuNaissance = naissance.get("lieuNaissance");
+	// 	String dateStr = naissance.get("dateNaissance");
+	// 	dateNaissance = new SimpleDateFormat("yyyy/dd/MM").parse(dateStr);  
+	// }
 }
