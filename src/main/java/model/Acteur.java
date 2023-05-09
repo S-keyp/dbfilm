@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import jakarta.persistence.Id;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 
 
@@ -32,7 +33,7 @@ public class Acteur {
 	
 	private Float height;
 	
-	@OneToMany(mappedBy = "acteur")
+	@OneToMany(mappedBy = "acteur", fetch = FetchType.LAZY)
 	private List<Role> roles = new ArrayList<>();
 
 	public String getid() {
@@ -83,6 +84,12 @@ public class Acteur {
 		this.roles = roles;
 	}
 
+	@Override
+	public String toString() {
+		return "Acteur [identite=" + identite + ", naissance=" + naissance + ", roles=" + roles + "]";
+	}
+
+	
 	// @JsonProperty("naissance")
 	// private void unpackNameFromNestedObject(Map<String, String> naissance) throws ParseException {
 	// 	lieuNaissance = naissance.get("lieuNaissance");

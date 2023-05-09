@@ -38,5 +38,11 @@ public class Pays {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+
+	@Override
+	public String toString() {
+		return "Pays [nom=" + nom + "]";
+	}
+	
 	
 }

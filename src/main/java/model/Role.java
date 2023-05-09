@@ -2,6 +2,7 @@ package model;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 
@@ -21,11 +22,11 @@ public class Role {
 	
 	private String nomPersonnage;
 	
-	@ManyToOne 
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_film")
 	private Film film;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_acteur")
 	private Acteur acteur;
 
@@ -61,4 +62,10 @@ public class Role {
 	public void setActeur(Acteur acteur) {
 		this.acteur = acteur;
 	}
+
+	@Override
+	public String toString() {
+		return "Role [nomPersonnage=" + nomPersonnage + ", film=" + film + ", acteur=" + acteur + "]";
+	}
+
 }
