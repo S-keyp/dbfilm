@@ -24,11 +24,10 @@ public class BDDTest {
 
         //CREATION FILM
         Film film = new Film();
+        film.setLangue("EN");
         film.setTitle("The Dictator");
-        film.setPlot("Un dictateur fou découvre l'amour en Amérique");
-        // film.setAnneeSortie(new Date(2012));
         film.setUrl("http://thedictator.com");
-        film.setLangue("null");
+        film.setPlot("Un dictateur fou découvre l'amour en Amérique");
 
         String dateSortieString = "2012";
         int dateSortieInt = Integer.parseInt(dateSortieString);
@@ -43,7 +42,7 @@ public class BDDTest {
         Genre genreHumour = new Genre();
         genreHumour.setNom("Humour");
         Genre genreSatyre = new Genre();
-        genreHumour.setNom("Satyre");
+        genreSatyre.setNom("Satyre");
         Genre genreAbsurd = new Genre();
         genreAbsurd.setNom("Absurde");
         List<Genre> genres = new ArrayList<>(

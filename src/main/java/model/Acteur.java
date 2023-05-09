@@ -2,6 +2,13 @@ package model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
@@ -13,8 +20,10 @@ import jakarta.persistence.GenerationType;
 public class Acteur {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@JsonIgnore
 	private Long id;
 	
+	@JsonProperty("id")
 	private String refActeur;
 	
 	private String identite;
@@ -92,5 +101,12 @@ public class Acteur {
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+
+	@JsonProperty("naissance")
+	private void unpackNameFromNestedObject(Map<String, String> naissance) throws ParseException {
+		lieuNaissance = naissance.get("lieuNaissance");
+		String dateStr = naissance.get("dateNaissance");
+		dateNaissance = new SimpleDateFormat("yyyy/dd/MM").parse(dateStr);  
 	}
 }

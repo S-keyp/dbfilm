@@ -2,6 +2,12 @@ package model;
 
 import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JacksonInject;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+
 import java.util.ArrayList;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
@@ -19,9 +25,11 @@ import jakarta.persistence.GenerationType;
 public class Film {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonIgnore
     private Long id;
 
 	@Column(unique = true)
+	@JsonProperty("id")
 	private String ref;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
@@ -30,6 +38,7 @@ public class Film {
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="id_lieu")
+	@JsonProperty("lieuTournage")
 	private Lieu lieu;
 
 	@ManyToMany(cascade = CascadeType.PERSIST)
@@ -39,8 +48,10 @@ public class Film {
     private List<Genre> genres = new ArrayList<>();
 
 	@OneToMany(mappedBy = "film", cascade = CascadeType.PERSIST)
+	@JsonProperty("castingPrincipal")
 	private List<Role> casting = new ArrayList<>();
 
+	@JsonProperty("nom")
 	private String title;
 
     private String url;
