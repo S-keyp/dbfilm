@@ -2,9 +2,9 @@ package model;
 
 import java.util.List;
 import java.util.ArrayList;
+
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

@@ -3,11 +3,6 @@ package model;
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
-
 import java.util.ArrayList;
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
@@ -17,8 +12,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.CascadeType;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
 @Entity
-@JsonIgnoreProperties(value = { "castingPrincipal", "genres" })
+@JsonIgnoreProperties(value = { "castingPrincipal", "genres", "anneeSortie" })
 public class Film {
 	@Id
 	private String id;

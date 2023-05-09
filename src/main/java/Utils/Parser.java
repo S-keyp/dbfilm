@@ -14,11 +14,11 @@ public class Parser {
         ObjectMapper mapper = new ObjectMapper();
 
         try{
-            Film[] films = mapper.readValue(new File("film.json"), Film[].class);
+            Film[] films = mapper.readValue(new File("films.json"), Film[].class);
             em.getTransaction().begin();
             
             for(Film film : films) {
-                System.out.println(film);
+                // System.out.println(film);
                 em.merge(film);
             }
 
