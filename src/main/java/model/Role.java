@@ -22,7 +22,7 @@ public class Role {
 	
 	private String nomPersonnage;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_film")
 	private Film film;
 	

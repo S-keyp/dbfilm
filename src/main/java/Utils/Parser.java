@@ -19,7 +19,7 @@ public class Parser {
             
             for(Film film : films) {
                 System.out.println(film);
-                em.persist(film);
+                em.merge(film);
             }
 
             em.getTransaction().commit();

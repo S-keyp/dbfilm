@@ -32,7 +32,7 @@ public class Film {
 	@JsonProperty("lieuTournage")
 	private Lieu lieu;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	private List<Realisateur> realisateurs = new ArrayList<>();
 
 	@ManyToMany(cascade = CascadeType.MERGE)
@@ -145,7 +145,7 @@ public class Film {
 	@Override
 	public String toString() {
 		return "Film [id=" + id + ", title=" + title + ", ROLES=" + roles + ", plot=" + plot + ", anneeSortie="
-				+ anneeSortie + ", pays=" + pays + "]";
+				+ anneeSortie + ", pays=" + pays + ", REALISATEURS=" + realisateurs + "]";
 	}
 
 }
