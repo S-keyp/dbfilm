@@ -2,6 +2,7 @@ package Utils;
 
 import model.Film;
 import model.Lieu;
+import model.Naissance;
 import model.Pays;
 import model.Role;
 import model.Genre;
@@ -24,11 +25,11 @@ public class BDDTest {
 
         //CREATION FILM
         Film film = new Film();
+        film.setId("tt89df5");
         film.setTitle("The Dictator");
         film.setPlot("Un dictateur fou découvre l'amour en Amérique");
-        // film.setAnneeSortie(new Date(2012));
         film.setUrl("http://thedictator.com");
-        film.setLangue("null");
+        film.setLangue("EN");
 
         String dateSortieString = "2012";
         int dateSortieInt = Integer.parseInt(dateSortieString);
@@ -58,15 +59,21 @@ public class BDDTest {
 
         //CREATION ACTEURS
         Acteur acteurSacha = new Acteur();
+        acteurSacha.setId("TFFME56");
         acteurSacha.setIdentite("Sacha Baron Cohen");
-        acteurSacha.setLieuNaissance("Hammersmith, Londres, Royaume-Uni");
         GregorianCalendar sachaCal = new GregorianCalendar(1971,9,13);
-        acteurSacha.setDateNaissance(sachaCal.getTime());
+        Naissance naissanceSacha = new Naissance();
+        naissanceSacha.setLieuNaissance("Hammersmith, Londres, Royaume-Uni");
+        naissanceSacha.setDateNaissance(sachaCal.getTime().toString());
+        acteurSacha.setNaissance(naissanceSacha);
         Acteur acteurJason = new Acteur();
+        acteurJason.setId("FDURK98");
         acteurJason.setIdentite("Jason Mantzoukas");
-        acteurJason.setLieuNaissance("Nahant, Massachusetts, États-Unis");
         GregorianCalendar jasonCal = new GregorianCalendar(1972,11,18);
-        acteurJason.setDateNaissance(jasonCal.getTime());
+        Naissance naissanceJason = new Naissance();
+        naissanceJason.setLieuNaissance("Nahant, Massachusetts, États-Unis");
+        naissanceJason.setDateNaissance(jasonCal.getTime().toString());
+        acteurJason.setNaissance(naissanceJason);
 
 
         //CREATION LIST ROLES
@@ -81,7 +88,7 @@ public class BDDTest {
         List<Role> roles = new ArrayList<>();
         roles.add(roleDictateur);
         roles.add(roleScientifique);
-        film.setCasting(roles);
+        film.setRoles(roles);
 
 
         //CREATION LIEU & PAYS

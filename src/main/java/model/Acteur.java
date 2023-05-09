@@ -2,26 +2,26 @@ package model;
 
 import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.ArrayList;
 import jakarta.persistence.Id;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+
 
 @Entity
+@JsonIgnoreProperties(value = {"height, roles"})
 public class Acteur {
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Long id;
-	
-	private String refActeur;
+	private String id;
 	
 	private String identite;
 	
-	private Date dateNaissance;
-	
-	private String lieuNaissance;
+	@Embedded
+	private Naissance naissance;
 	
 	private String url;
 	
@@ -30,20 +30,12 @@ public class Acteur {
 	@OneToMany(mappedBy = "acteur")
 	private List<Role> roles = new ArrayList<>();
 
-	public Long getId() {
+	public String getid() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
-	}
-	
-	public String getrefActeur() {
-		return refActeur;
-	}
-
-	public void setId(String refActeur) {
-		this.refActeur = refActeur;
 	}
 
 	public String getIdentite() {
@@ -54,20 +46,12 @@ public class Acteur {
 		this.identite = identite;
 	}
 
-	public Date getDateNaissance() {
-		return dateNaissance;
+	public Naissance getnaissance() {
+		return naissance;
 	}
 
-	public void setDateNaissance(Date dateNaissance) {
-		this.dateNaissance = dateNaissance;
-	}
-
-	public String getLieuNaissance() {
-		return lieuNaissance;
-	}
-
-	public void setLieuNaissance(String lieuNaissance) {
-		this.lieuNaissance = lieuNaissance;
+	public void setNaissance(Naissance naissance){
+		this.naissance = naissance;
 	}
 
 	public String getUrl() {

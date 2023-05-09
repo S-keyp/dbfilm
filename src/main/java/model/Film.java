@@ -2,27 +2,27 @@ package model;
 
 import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 import java.util.ArrayList;
 import jakarta.persistence.Id;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 
 
 @Entity
+@JsonIgnoreProperties(value = {"castingPrincipal"})
 public class Film {
     @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-	@Column(unique = true)
-	private String ref;
+	private String id;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="id_pays")
@@ -39,7 +39,7 @@ public class Film {
     private List<Genre> genres = new ArrayList<>();
 
 	@OneToMany(mappedBy = "film", cascade = CascadeType.PERSIST)
-	private List<Role> casting = new ArrayList<>();
+	private List<Role> roles = new ArrayList<>();
 
 	private String title;
 
@@ -51,14 +51,15 @@ public class Film {
 
     private Date anneeSortie;
 
-    public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-    public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
+	@JsonProperty("nom")
     public String getTitle() {
 		return title;
 	}
@@ -91,6 +92,7 @@ public class Film {
 		this.langue = langue;
 	}
 
+	@JsonProperty("lieuTournage")
 	public Lieu getLieu() {
 		return lieu;
 	}
@@ -115,12 +117,12 @@ public class Film {
 		this.realisateurs = realisateurs;
 	}
 
-	public List<Role> getCasting() {
-		return casting;
+	public List<Role> getRoles() {
+		return roles;
 	}
 
-	public void setCasting(List<Role> casting) {
-		this.casting = casting;
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 	public Date getAnneeSortie() {
