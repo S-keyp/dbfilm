@@ -128,7 +128,7 @@ public class BDDTest {
         em.getTransaction().begin();
 
 
-        em.persist(film);
+        em.merge(film);
 
 
         em.getTransaction().commit();

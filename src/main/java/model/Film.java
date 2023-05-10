@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
-@JsonIgnoreProperties(value = { "castingPrincipal", "genres", "anneeSortie" })
+@JsonIgnoreProperties(value = { "castingPrincipal", "anneeSortie" })
 public class Film {
 	@Id
 	private String id;
@@ -35,8 +35,8 @@ public class Film {
 	private List<Realisateur> realisateurs = new ArrayList<>();
 
 	@ManyToMany(cascade = CascadeType.MERGE)
-	private List<Genre> genres = new ArrayList<>();
-
+	private List<Genre> listGenres = new ArrayList<>();
+	
 	@OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
 	private List<Role> roles = new ArrayList<>();
 
@@ -50,6 +50,18 @@ public class Film {
 	private String langue;
 
 	private Date anneeSortie;
+
+	@JsonProperty("genres")
+    private void transformListToGenreList(List<String> noms) {
+        if (noms != null) {
+            for (String nom : noms) {
+                Genre genre = new Genre();
+                genre.setNom(nom);
+                genre.getFilms().add(this);
+                listGenres.add(genre);
+            }
+        }
+    }
 
 	public String getId() {
 		return id;
@@ -134,11 +146,11 @@ public class Film {
 	}
 
 	public List<Genre> getGenres() {
-		return genres;
+		return listGenres;
 	}
 
-	public void setGenres(List<Genre> genres) {
-		this.genres = genres;
+	public void setGenres(List<Genre> listGenres) {
+		this.listGenres = listGenres;
 	}
 
 	@Override
