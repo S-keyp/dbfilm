@@ -9,29 +9,23 @@ import model.Film;
 import model.Role;
 
 public class Parser {
-    public static void main(String[] args) {
-        EntityManager em = JPAUtils.getInstance().getEntityManager();   
+    public static Film[] parse() {
+        
 
         ObjectMapper mapper = new ObjectMapper();
-
+        Film[] films = null;
         try{
-            Film[] films = mapper.readValue(new File("film.json"), Film[].class);
-            em.getTransaction().begin();
-            
+            films = mapper.readValue(new File("film.json"), Film[].class);
             for(Film film : films) {
                 // System.out.println(film);
                 for(Role role : film.getRoles()){
                     role.setFilm(film);
                 }
-                em.merge(film);
             }
-
-            em.getTransaction().commit();
-            em.close();
-        } catch (Exception e) {
+        } catch (Exception e){
             e.printStackTrace();
-            em.close();
         }
-
+    
+        return films;
     }
 }
