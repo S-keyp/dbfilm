@@ -12,7 +12,7 @@ import jakarta.persistence.EntityManager;
 
 public class ActeurDAO{
 
-    
+
 
 
 
@@ -32,18 +32,11 @@ public class ActeurDAO{
         return acteur.get(0);
     }
 
-    // RETOURNE LA LISTE DES ROLES DUN ACTEUR
-    public static List<Role> getRolesForActor(EntityManager em, Acteur acteur){
-        TypedQuery<Role> queryRole = em.createNamedQuery("Role.getRolesForActorId", Role.class);
-        queryRole.setParameter("acteur", acteur);
-        List<Role> roles = queryRole.getResultList();
-        return roles;
-    }
 
     //RETOURNE LA FILMOGRAPHIE POUR UNE IDENTITE D ACTEUR
     public static List<Film> getFilmographieForActor(EntityManager em, String identite){
         Acteur acteur = getActeur(em, identite);
-        List<Role> roles = getRolesForActor(em, acteur);
+        List<Role> roles = RoleDAO.getRolesForActor(em, acteur);
         List<Film> films = new ArrayList<Film>();
         for (Role role : roles){
             films.add(role.getFilm());

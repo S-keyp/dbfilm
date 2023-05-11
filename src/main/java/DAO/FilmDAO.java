@@ -38,14 +38,14 @@ public class FilmDAO {
         // System.out.println(getFilm(em, "Ninja"));
         // System.out.println(getActorsForFilm(em, "Ninja"));
         // System.out.println(getFilmsBetweenYears(em, 2014, 2019));
-        System.out.println(getMoviesForActorBetweenYears(em, 2012, 2019, "Pra"));
-        
+        // System.out.println(getMoviesForActorBetweenYears(em, 2012, 2019, "Pra"));
+        // System.out.println(getCommonFilmsForActors(em, "Chris", "Millie"));;
         em.close();
 
     }
 
 
-
+    
     
 
 
@@ -120,5 +120,23 @@ public class FilmDAO {
         return films;
     }
 
+    // RETURN LIST OF COMMON MOVIE BETWEEN TO ACTORS
+    public static List<Film> getCommonFilmsForActors(EntityManager em, String identite1, String identite2){
+        List<Film> filmsCommun = new ArrayList<>();
+
+        List<Film> filmsForActor1 = ActeurDAO.getFilmographieForActor(em, identite1);
+        Acteur acteur2 = ActeurDAO.getActeur(em, identite2);    
+        List<Role> rolesActeur2 = RoleDAO.getRolesForActor(em, acteur2);
+
+        for(Film film : filmsForActor1){
+            for(Role roleFilmsActeur1 : film.getRoles()){
+                for(Role role : rolesActeur2){
+                    if(roleFilmsActeur1 == role) filmsCommun.add(film);
+                }
+            }            
+        }
+        
+        return filmsForActor1;
+    }
 
 }

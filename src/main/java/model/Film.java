@@ -27,6 +27,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 		name="Film.findFilmBetweenYears", 
 		query="SELECT f FROM Film f WHERE f.anneeSortie BETWEEN :date1 AND :date2"
 	),
+	@NamedQuery(
+		name="Film.findCommonFilmBetweenActors", 
+		query="SELECT f FROM Film f WHERE f.roles = :role1 AND f.roles = :role2"
+	),
 
 
 
@@ -177,7 +181,7 @@ public class Film {
 
 	@Override
 	public String toString() {
-		return "Film [id=" + id + ", title=" + title + ", plot=" + plot + ", anneeSortie="
+		return "Film [id=" + id + ", title=" + title + ", anneeSortie="
 				+ anneeSortie + ", pays=" + pays + ", REALISATEURS=" + realisateurs + "]";
 	}
 
