@@ -38,11 +38,13 @@ public class FilmDAO {
      * @return Film
      */
     public static Film getFilm(String filmTitle){
-        TypedQuery<Film> queryRole = em.createNamedQuery("Film.findFilm", Film.class);
-        filmTitle = "%" + filmTitle + "%";
-        queryRole.setParameter("title", filmTitle);
-        Film film = queryRole.getResultList().get(0);
-        return film;
+        return em
+            .createNamedQuery("Film.findFilm", Film.class)
+            .setParameter("title", "%" + filmTitle + "%")
+            .getResultList()
+            .stream()
+            .findFirst()
+            .orElse(null);
     }
 
     /**
@@ -61,10 +63,11 @@ public class FilmDAO {
         cal2.set(Calendar.MONTH, 0);
         cal2.set(Calendar.DAY_OF_MONTH, 1);  
 
-        TypedQuery<Film> query = em.createNamedQuery("Film.findFilmBetweenYears", Film.class);
-        query.setParameter("date1", cal1.getTime());
-        query.setParameter("date2", cal2.getTime());
-        return query.getResultList();
+        return  em
+            .createNamedQuery("Film.findFilmBetweenYears", Film.class)
+            .setParameter("date1", cal1.getTime())
+            .setParameter("date2", cal2.getTime())
+            .getResultList();
     }
 
     /**
