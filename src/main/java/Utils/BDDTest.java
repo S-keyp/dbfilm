@@ -10,6 +10,9 @@ import model.Acteur;
 import model.Realisateur;
 
 import java.util.List;
+
+import executable.App;
+
 import java.util.GregorianCalendar;
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -18,7 +21,7 @@ import jakarta.persistence.EntityManager;
 
 public class BDDTest {
     public static void main (String[] args){
-        EntityManager em = JPAUtils.getInstance().getEntityManager();     
+        EntityManager em = App.em;     
 
 
         //CREATION FILM
@@ -28,20 +31,9 @@ public class BDDTest {
         film.setPlot("Un dictateur fou découvre l'amour en Amérique");
         film.setUrl("http://thedictator.com");
         film.setLangue("EN");
-        // film.setLangue("EN");
-        // film.setTitle("The Dictator");
-        // film.setUrl("http://thedictator.com");
-        // film.setPlot("Un dictateur fou découvre l'amour en Amérique");
-
         String dateSortieString = "2012";
         film.setAnneeSortie(dateSortieString);
-        // int dateSortieInt = Integer.parseInt(dateSortieString);
-        // Calendar cal = Calendar.getInstance();
-        // cal.set(Calendar.YEAR, dateSortieInt);
-        // cal.set(Calendar.MONTH, 0);
-        // cal.set(Calendar.DAY_OF_MONTH, 1);
-        // film.setAnneeSortie(cal.getTime());        
-
+        
 
         //CREATION LISTE GENRES ASSOCIES A FILM
         Genre genreHumour = new Genre();

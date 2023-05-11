@@ -10,7 +10,6 @@ import executable.App;
 
 import java.util.ArrayList;
 
-import jakarta.persistence.TypedQuery;
 import jakarta.persistence.EntityManager;
 
 public class ActeurDAO{
@@ -32,7 +31,11 @@ public class ActeurDAO{
             .orElse(null);
     }
 
-    //RETOURNE LA FILMOGRAPHIE POUR UNE IDENTITE D ACTEUR
+    /**
+     * RETOURNE LA FILMOGRAPHIE POUR UNE IDENTITE D ACTEUR
+     * @param identite String
+     * @return List<Film>
+     */
     public static List<Film> getFilmographieForActor(String identite){
         Acteur acteur = getActeur(identite);
         List<Role> roles = RoleDAO.getRolesForActor(acteur);
@@ -43,7 +46,12 @@ public class ActeurDAO{
         return films;
     }
 
-    // RETURN LIST OF COMMON ACTORS BETWEEN TWO MOVIES
+    /**
+     * RETURN LIST OF COMMON ACTORS BETWEEN TWO MOVIES
+     * @param title1 String
+     * @param title2 String
+     * @return List<Acteur>
+     */
     public static List<Acteur> getCommonActorsForFilms(String title1, String title2){
         List<Acteur> acteursCommun = new ArrayList<>();
 

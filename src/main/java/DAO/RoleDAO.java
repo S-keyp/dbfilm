@@ -29,7 +29,11 @@ public class RoleDAO {
         return roles;
     }
 
-    //RECHERCHE ACTEURS POUR UN FILM 
+    /**
+     * RECHERCHE ACTEURS POUR UN FILM 
+     * @param filmTitle String
+     * @return List<Acteur>
+     */
     public static List<Acteur> getActorsForFilm(String filmTitle){
         Film film = FilmDAO.getFilm(filmTitle);
         TypedQuery<Role> queryRole = em.createNamedQuery("Role.getRolesForFilm", Role.class);

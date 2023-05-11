@@ -86,14 +86,6 @@ public class Acteur {
 
 	@Override
 	public String toString() {
-		return "Acteur [identite=" + identite + ", naissance=" + naissance + ", roles=" + roles + "]";
+		return "Acteur [identite=" + identite + ", naissance=" + naissance + "]";
 	}
-
-	
-	// @JsonProperty("naissance")
-	// private void unpackNameFromNestedObject(Map<String, String> naissance) throws ParseException {
-	// 	lieuNaissance = naissance.get("lieuNaissance");
-	// 	String dateStr = naissance.get("dateNaissance");
-	// 	dateNaissance = new SimpleDateFormat("yyyy/dd/MM").parse(dateStr);  
-	// }
 }

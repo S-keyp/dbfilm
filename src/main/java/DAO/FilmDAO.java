@@ -3,9 +3,8 @@ package DAO;
 import model.Role;
 import model.Film;
 import Utils.Parser;
-import executable.App;
 import model.Acteur;
-import Utils.JPAUtils;
+import executable.App;
 
 import java.util.List;
 import java.util.Calendar;
@@ -31,23 +30,13 @@ public class FilmDAO {
                 e.printStackTrace();
             }
         }
-        
-        // TEST QUERIES
-        // System.out.println("Filmographie: " + ActeurDAO.getFilmographieForActor("Chris"));
-        // System.out.println("Film: " + getFilm(em, "Ninja"));
-        // System.out.println("Aceturs pour le film: " + RoleDAO.getActorsForFilm(em, "Ninja"));
-        // System.out.println("Film entre 2014 et 2019: " + getFilmsBetweenYears(em, 2014, 2019));
-        // System.out.println("Film entre 2012 et 2019 pour Pratt: " + getMoviesForActorBetweenYears(em, 2012, 2019, "Pratt"));
-        // System.out.println("Film communs à Chris et Millie: " + getCommonFilmsForActors(em, "Chris", "Millie"));
-        // System.out.println("Film acteurs communs à Electric et Ninja: " + ActeurDAO.getCommonActorsForFilms("Electric", "Ninja"));;
-        
-        
-        // em.close();
-
     }
     
-   
-    //RECHERCHER FILM
+    /**
+     * RECHERCHER FILM
+     * @param filmTitle String
+     * @return Film
+     */
     public static Film getFilm(String filmTitle){
         TypedQuery<Film> queryRole = em.createNamedQuery("Film.findFilm", Film.class);
         filmTitle = "%" + filmTitle + "%";
@@ -56,7 +45,12 @@ public class FilmDAO {
         return film;
     }
 
-    // RETURN FILMS BETWEEN 2 YEARS
+    /**
+     * RETURN FILMS BETWEEN 2 YEARS
+     * @param yearStart int
+     * @param yearEnd int
+     * @return List<Film>
+     */
     public static List<Film> getFilmsBetweenYears(int yearStart, int yearEnd){
         Calendar cal1 = Calendar.getInstance();
         cal1.set(Calendar.YEAR, yearStart);
@@ -73,7 +67,13 @@ public class FilmDAO {
         return query.getResultList();
     }
 
-    // RETURN FILMS BETWEEN 2 YEARS WITH SPECIFIED ACTOR
+    /**
+     * RETURN FILMS BETWEEN 2 YEARS WITH SPECIFIED ACTOR
+     * @param yearStart int
+     * @param yearEnd int 
+     * @param identite String
+     * @return List<Film>
+     */
     public static List<Film> getMoviesForActorBetweenYears(int yearStart, int yearEnd, String identite){
         Calendar cal1 = Calendar.getInstance();
         cal1.set(Calendar.YEAR, yearStart);
@@ -94,7 +94,12 @@ public class FilmDAO {
         return films;
     }
 
-    // RETURN LIST OF COMMON MOVIES BETWEEN TWO ACTORS
+    /**
+     * RETURN LIST OF COMMON MOVIES BETWEEN TWO ACTORS
+     * @param identite1 String
+     * @param identite2 String
+     * @return List<Film>
+     */
     public static List<Film> getCommonFilmsForActors(String identite1, String identite2){
         List<Film> filmsCommun = new ArrayList<>();
 
