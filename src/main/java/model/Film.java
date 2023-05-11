@@ -136,15 +136,17 @@ public class Film {
 		return anneeSortie;
 	}
 
+	@JsonProperty("anneeSortie")
 	public void setAnneeSortie(String anneeSortie) {
-		if (anneeSortie.length() > 4)
-			anneeSortie = anneeSortie.substring(0, 4);
+		if(anneeSortie.isBlank()) return;
+		if (anneeSortie.length() > 4) anneeSortie = anneeSortie.substring(0, 4);
 		int dateSortieInt = Integer.parseInt(anneeSortie);
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, dateSortieInt);
 		cal.set(Calendar.MONTH, 0);
 		cal.set(Calendar.DAY_OF_MONTH, 1);
 		this.anneeSortie = cal.getTime();
+	
 	}
 
 	@JsonProperty("genres")
@@ -169,7 +171,7 @@ public class Film {
 
 	@Override
 	public String toString() {
-		return "Film [title=" + title + ", anneeSortie=" + anneeSortie + ", pays=" + pays + "]";
+		return "\n Film [title= " + title + ", anneeSortie= " + anneeSortie + ", pays= " + pays + "] \n";
 	}
 
 }

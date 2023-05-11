@@ -71,7 +71,7 @@ public class Role {
 
 	@Override
 	public String toString() {
-		return "Role [nomPersonnage=" + nomPersonnage + ", film=" + film + ", acteur=" + acteur + "]";
+		return "\n Role [nomPersonnage= " + nomPersonnage + ", film= " + film + ", acteur= " + acteur + "] \n";
 	}
 
 }

@@ -6,29 +6,16 @@ import java.util.ArrayList;
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 
 @Entity
 public class Realisateur {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
 	private String identite;
 	
 	private String url;
 
 	@ManyToMany(mappedBy = "realisateurs")
 	private List<Film> films = new ArrayList<>();
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getIdentite() {
 		return identite;
@@ -56,7 +43,7 @@ public class Realisateur {
 
 	@Override
 	public String toString() {
-		return "Realisateur [identite=" + identite + ", films=" + films + "]";
+		return "\n Realisateur [identite= " + identite + ", films= " + films + "] \n";
 	}
 
 	

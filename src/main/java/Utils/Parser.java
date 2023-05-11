@@ -1,4 +1,4 @@
-package Utils;
+package utils;
 
 import java.io.File;
 
@@ -14,7 +14,7 @@ public class Parser {
         Film[] films = null;
     
         try{
-            films = mapper.readValue(new File("film.json"), Film[].class);
+            films = mapper.readValue(new File("films.json"), Film[].class);
             for(Film film : films) {
                 for(Role role : film.getRoles()){
                     role.setFilm(film);

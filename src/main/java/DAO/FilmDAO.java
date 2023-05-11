@@ -1,17 +1,19 @@
 package DAO;
 
+import executable.App;
+
+import utils.Parser;
+
 import model.Role;
 import model.Film;
-import Utils.Parser;
 import model.Acteur;
-import executable.App;
 
 import java.util.List;
 import java.util.Calendar;
 import java.util.ArrayList;
 
-import jakarta.persistence.TypedQuery;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceException;
 
 public class FilmDAO {
     public static EntityManager em = App.em;
@@ -26,8 +28,9 @@ public class FilmDAO {
                 em.merge(film);
 
                 em.getTransaction().commit();
-            }catch(Exception e){
+            }catch(PersistenceException e){
                 e.printStackTrace();
+                em.getTransaction().rollback();
             }
         }
     }

@@ -1,4 +1,4 @@
-package Utils;
+package utils;
 
 import model.Film;
 import model.Lieu;
@@ -20,7 +20,7 @@ import jakarta.persistence.EntityManager;
 
 
 public class BDDTest {
-    public static void main (String[] args){
+    public static void test (){
         EntityManager em = App.em;     
 
 

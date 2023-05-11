@@ -1,10 +1,11 @@
 package executable;
 
 import DAO.FilmDAO;
-import Utils.JPAUtils;
-import Utils.Menu;
 
 import java.util.Scanner;
+
+import utils.Menu;
+import utils.JPAUtils;
 
 import jakarta.persistence.EntityManager;
 
@@ -15,7 +16,7 @@ public class App {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        // BDDTest.main(args);
+        // BDDTest.test();
         try{
             FilmDAO.init();
         }catch(Exception e){
