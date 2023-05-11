@@ -4,12 +4,12 @@ import java.util.List;
 
 import java.util.ArrayList;
 import jakarta.persistence.Id;
-import jakarta.persistence.NamedQueries;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.NamedQueries;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

@@ -1,16 +1,16 @@
 package DAO;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
-import model.Acteur;
-import model.Film;
 import model.Role;
+import model.Film;
+import model.Acteur;
+
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.EntityManager;
 
 public class RoleDAO {
-    
     /**
      * RETOURNE LA LISTE DES ROLES DUN ACTEUR
      * @param em EntityManager
@@ -23,7 +23,6 @@ public class RoleDAO {
         List<Role> roles = queryRole.getResultList();
         return roles;
     }
-
 
     //RECHERCHE ACTEURS POUR UN FILM 
     public static List<Acteur> getActorsForFilm(EntityManager em, String filmTitle){

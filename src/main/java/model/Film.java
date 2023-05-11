@@ -2,19 +2,19 @@ package model;
 
 import java.util.List;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.Calendar;
+import java.util.ArrayList;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.NamedQueries;
-import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.NamedQueries;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -31,10 +31,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 		name="Film.findCommonFilmBetweenActors", 
 		query="SELECT f FROM Film f WHERE f.roles = :role1 AND f.roles = :role2"
 	),
-
-
-
-	@NamedQuery(name="Film.findAllFilmForActor", query="SELECT f FROM Film f WHERE f.id LIKE :id"), 
 })
 @JsonIgnoreProperties(value = { "castingPrincipal" })
 public class Film {

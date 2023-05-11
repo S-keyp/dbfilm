@@ -1,16 +1,17 @@
 package DAO;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
-import Utils.JPAUtils;
-import Utils.Parser;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
-import model.Acteur;
-import model.Film;
 import model.Role;
+import model.Film;
+import Utils.Parser;
+import model.Acteur;
+import Utils.JPAUtils;
+
+import java.util.List;
+import java.util.Calendar;
+import java.util.ArrayList;
+
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.EntityManager;
 
 public class FilmDAO {
     public static void main(String[] args) throws Exception {
@@ -30,46 +31,17 @@ public class FilmDAO {
             }
         }
         
-
-       
-
-        // TEST FILMOGRAPHIE
+        // TEST QUERIES
         // System.out.println(ActeurDAO.getFilmographieForActor(em, "Chris"));
         // System.out.println(getFilm(em, "Ninja"));
         // System.out.println(getActorsForFilm(em, "Ninja"));
         // System.out.println(getFilmsBetweenYears(em, 2014, 2019));
         // System.out.println(getMoviesForActorBetweenYears(em, 2012, 2019, "Pra"));
         // System.out.println(getCommonFilmsForActors(em, "Chris", "Millie"));;
+        // System.out.println(ActeurDAO.getCommonActorsForFilms(em, "Electric", "Ninja"));;
         em.close();
 
     }
-
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
    
     //RECHERCHER FILM
@@ -120,7 +92,7 @@ public class FilmDAO {
         return films;
     }
 
-    // RETURN LIST OF COMMON MOVIE BETWEEN TO ACTORS
+    // RETURN LIST OF COMMON MOVIES BETWEEN TWO ACTORS
     public static List<Film> getCommonFilmsForActors(EntityManager em, String identite1, String identite2){
         List<Film> filmsCommun = new ArrayList<>();
 
@@ -136,7 +108,7 @@ public class FilmDAO {
             }            
         }
         
-        return filmsForActor1;
+        return filmsCommun;
     }
 
 }
