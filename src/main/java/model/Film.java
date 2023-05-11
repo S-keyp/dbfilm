@@ -19,18 +19,10 @@ import jakarta.persistence.NamedQueries;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
 @Entity
 @NamedQueries({
-	@NamedQuery(name="Film.findFilm", query="SELECT f FROM Film f WHERE f.title LIKE :title"),
-	@NamedQuery(
-		name="Film.findFilmBetweenYears", 
-		query="SELECT f FROM Film f WHERE f.anneeSortie BETWEEN :date1 AND :date2"
-	),
-	@NamedQuery(
-		name="Film.findCommonFilmBetweenActors", 
-		query="SELECT f FROM Film f WHERE f.roles = :role1 AND f.roles = :role2"
-	),
+		@NamedQuery(name = "Film.findFilm", query = "SELECT f FROM Film f WHERE f.title LIKE :title"),
+		@NamedQuery(name = "Film.findFilmBetweenYears", query = "SELECT f FROM Film f WHERE f.anneeSortie BETWEEN :date1 AND :date2"),
 })
 @JsonIgnoreProperties(value = { "castingPrincipal" })
 public class Film {
@@ -51,7 +43,7 @@ public class Film {
 
 	@ManyToMany(cascade = CascadeType.MERGE)
 	private List<Genre> listGenres = new ArrayList<>();
-	
+
 	@OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
 	private List<Role> roles = new ArrayList<>();
 
@@ -65,7 +57,6 @@ public class Film {
 	private String langue;
 
 	private Date anneeSortie;
-
 
 	public String getId() {
 		return id;
@@ -146,26 +137,27 @@ public class Film {
 	}
 
 	public void setAnneeSortie(String anneeSortie) {
-		if(anneeSortie.length() > 4) anneeSortie = anneeSortie.substring(0,4);
+		if (anneeSortie.length() > 4)
+			anneeSortie = anneeSortie.substring(0, 4);
 		int dateSortieInt = Integer.parseInt(anneeSortie);
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, dateSortieInt);
-        cal.set(Calendar.MONTH, 0);
-        cal.set(Calendar.DAY_OF_MONTH, 1);     
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, dateSortieInt);
+		cal.set(Calendar.MONTH, 0);
+		cal.set(Calendar.DAY_OF_MONTH, 1);
 		this.anneeSortie = cal.getTime();
 	}
 
 	@JsonProperty("genres")
-    private void transformListToGenreList(List<String> noms) {
-        if (noms != null) {
-            for (String nom : noms) {
-                Genre genre = new Genre();
-                genre.setNom(nom);
-                genre.getFilms().add(this);
-                listGenres.add(genre);
-            }
-        }
-    }
+	private void transformListToGenreList(List<String> noms) {
+		if (noms != null) {
+			for (String nom : noms) {
+				Genre genre = new Genre();
+				genre.setNom(nom);
+				genre.getFilms().add(this);
+				listGenres.add(genre);
+			}
+		}
+	}
 
 	public List<Genre> getGenres() {
 		return listGenres;

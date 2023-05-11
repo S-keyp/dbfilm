@@ -3,6 +3,7 @@ package DAO;
 import model.Role;
 import model.Film;
 import Utils.Parser;
+import executable.App;
 import model.Acteur;
 import Utils.JPAUtils;
 
@@ -14,9 +15,9 @@ import jakarta.persistence.TypedQuery;
 import jakarta.persistence.EntityManager;
 
 public class FilmDAO {
-    public static void main(String[] args) throws Exception {
-        EntityManager em = JPAUtils.getInstance().getEntityManager();   
-
+    public static EntityManager em = App.em;
+    
+    public static void init() throws Exception {
         Film[] films = Parser.parse();
         
         for(Film film :films){
@@ -32,20 +33,22 @@ public class FilmDAO {
         }
         
         // TEST QUERIES
-        // System.out.println(ActeurDAO.getFilmographieForActor(em, "Chris"));
-        // System.out.println(getFilm(em, "Ninja"));
-        // System.out.println(getActorsForFilm(em, "Ninja"));
-        // System.out.println(getFilmsBetweenYears(em, 2014, 2019));
-        // System.out.println(getMoviesForActorBetweenYears(em, 2012, 2019, "Pra"));
-        // System.out.println(getCommonFilmsForActors(em, "Chris", "Millie"));;
-        // System.out.println(ActeurDAO.getCommonActorsForFilms(em, "Electric", "Ninja"));;
-        em.close();
+        // System.out.println("Filmographie: " + ActeurDAO.getFilmographieForActor("Chris"));
+        // System.out.println("Film: " + getFilm(em, "Ninja"));
+        // System.out.println("Aceturs pour le film: " + RoleDAO.getActorsForFilm(em, "Ninja"));
+        // System.out.println("Film entre 2014 et 2019: " + getFilmsBetweenYears(em, 2014, 2019));
+        // System.out.println("Film entre 2012 et 2019 pour Pratt: " + getMoviesForActorBetweenYears(em, 2012, 2019, "Pratt"));
+        // System.out.println("Film communs à Chris et Millie: " + getCommonFilmsForActors(em, "Chris", "Millie"));
+        // System.out.println("Film acteurs communs à Electric et Ninja: " + ActeurDAO.getCommonActorsForFilms("Electric", "Ninja"));;
+        
+        
+        // em.close();
 
     }
     
    
     //RECHERCHER FILM
-    public static Film getFilm(EntityManager em, String filmTitle){
+    public static Film getFilm(String filmTitle){
         TypedQuery<Film> queryRole = em.createNamedQuery("Film.findFilm", Film.class);
         filmTitle = "%" + filmTitle + "%";
         queryRole.setParameter("title", filmTitle);
@@ -54,8 +57,7 @@ public class FilmDAO {
     }
 
     // RETURN FILMS BETWEEN 2 YEARS
-    public static List<Film> getFilmsBetweenYears(EntityManager em, int yearStart, int yearEnd){
-        //CONVERT STRING TO INT THEN DATE
+    public static List<Film> getFilmsBetweenYears(int yearStart, int yearEnd){
         Calendar cal1 = Calendar.getInstance();
         cal1.set(Calendar.YEAR, yearStart);
         cal1.set(Calendar.MONTH, 0);
@@ -72,7 +74,7 @@ public class FilmDAO {
     }
 
     // RETURN FILMS BETWEEN 2 YEARS WITH SPECIFIED ACTOR
-    public static List<Film> getMoviesForActorBetweenYears(EntityManager em, int yearStart, int yearEnd, String identite){
+    public static List<Film> getMoviesForActorBetweenYears(int yearStart, int yearEnd, String identite){
         Calendar cal1 = Calendar.getInstance();
         cal1.set(Calendar.YEAR, yearStart);
         cal1.set(Calendar.MONTH, 0);
@@ -82,7 +84,7 @@ public class FilmDAO {
         cal2.set(Calendar.MONTH, 0);
         cal2.set(Calendar.DAY_OF_MONTH, 1);  
 
-        List<Film> films = ActeurDAO.getFilmographieForActor(em, identite);
+        List<Film> films = ActeurDAO.getFilmographieForActor(identite);
 
         for(Film film : films){
             if(cal1.after(film.getAnneeSortie())) films.remove(film);
@@ -93,12 +95,12 @@ public class FilmDAO {
     }
 
     // RETURN LIST OF COMMON MOVIES BETWEEN TWO ACTORS
-    public static List<Film> getCommonFilmsForActors(EntityManager em, String identite1, String identite2){
+    public static List<Film> getCommonFilmsForActors(String identite1, String identite2){
         List<Film> filmsCommun = new ArrayList<>();
 
-        List<Film> filmsForActor1 = ActeurDAO.getFilmographieForActor(em, identite1);
-        Acteur acteur2 = ActeurDAO.getActeur(em, identite2);    
-        List<Role> rolesActeur2 = RoleDAO.getRolesForActor(em, acteur2);
+        List<Film> filmsForActor1 = ActeurDAO.getFilmographieForActor(identite1);
+        Acteur acteur2 = ActeurDAO.getActeur(identite2);    
+        List<Role> rolesActeur2 = RoleDAO.getRolesForActor(acteur2);
 
         for(Film film : filmsForActor1){
             for(Role roleFilmsActeur1 : film.getRoles()){
