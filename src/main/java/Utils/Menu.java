@@ -1,4 +1,6 @@
-package executable;
+package Utils;
+
+import executable.App;
 
 import DAO.RoleDAO;
 import DAO.FilmDAO;
@@ -26,9 +28,9 @@ public class Menu {
                     break;
                 }
                 case 3:{
-                    System.out.println("Saisir la première date:");
+                    System.out.println("Saisir la première date: (inclu)");
                     String inputSecondaire = App.scanner.nextLine();
-                    System.out.println("Saisir la seconde date:");
+                    System.out.println("Saisir la seconde date: (exclu)");
                     String inputTertiaire = App.scanner.nextLine();
                     action3(inputSecondaire, inputTertiaire);
                     break;
@@ -50,9 +52,9 @@ public class Menu {
                     break;
                 }
                 case 6:{
-                    System.out.println("Saisir la première date:");
+                    System.out.println("Saisir la première date: (inclu)");
                     String inputSecondaire = App.scanner.nextLine();
-                    System.out.println("Saisir la seconde date:");
+                    System.out.println("Saisir la seconde date: (exclu)");
                     String inputTertiaire = App.scanner.nextLine();
                     System.out.println("Saisir le nom de l'acteur cherché:");
                     String inputQuaternaire = App.scanner.nextLine();
