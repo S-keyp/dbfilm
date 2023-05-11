@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
@@ -17,16 +19,20 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
-@JsonIgnoreProperties(value = { "castingPrincipal", "anneeSortie" })
+@NamedQueries({
+	@NamedQuery(name="Film.findAll", query="SELECT f FROM Film f WHERE f.id = :id"),
+	@NamedQuery(name="Film.findAllFilmForActor", query="SELECT f FROM Film f WHERE f.id LIKE :id"), 
+})
+@JsonIgnoreProperties(value = { "castingPrincipal" })
 public class Film {
 	@Id
 	private String id;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_pays")
 	private Pays pays;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_lieu")
 	@JsonProperty("lieuTournage")
 	private Lieu lieu;
@@ -49,7 +55,7 @@ public class Film {
 
 	private String langue;
 
-	private Date anneeSortie;
+	private String anneeSortie;
 
 	@JsonProperty("genres")
     private void transformListToGenreList(List<String> noms) {
@@ -137,11 +143,11 @@ public class Film {
 		this.roles = roles;
 	}
 
-	public Date getAnneeSortie() {
+	public String getAnneeSortie() {
 		return anneeSortie;
 	}
 
-	public void setAnneeSortie(Date anneeSortie) {
+	public void setAnneeSortie(String anneeSortie) {
 		this.anneeSortie = anneeSortie;
 	}
 
@@ -155,7 +161,7 @@ public class Film {
 
 	@Override
 	public String toString() {
-		return "Film [id=" + id + ", title=" + title + ", ROLES=" + roles + ", plot=" + plot + ", anneeSortie="
+		return "Film [id=" + id + ", title=" + title + ", plot=" + plot + ", anneeSortie="
 				+ anneeSortie + ", pays=" + pays + ", REALISATEURS=" + realisateurs + "]";
 	}
 

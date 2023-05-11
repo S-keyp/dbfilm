@@ -35,12 +35,13 @@ public class BDDTest {
         // film.setPlot("Un dictateur fou découvre l'amour en Amérique");
 
         String dateSortieString = "2012";
-        int dateSortieInt = Integer.parseInt(dateSortieString);
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, dateSortieInt);
-        cal.set(Calendar.MONTH, 0);
-        cal.set(Calendar.DAY_OF_MONTH, 1);
-        film.setAnneeSortie(cal.getTime());        
+        film.setAnneeSortie(dateSortieString);
+        // int dateSortieInt = Integer.parseInt(dateSortieString);
+        // Calendar cal = Calendar.getInstance();
+        // cal.set(Calendar.YEAR, dateSortieInt);
+        // cal.set(Calendar.MONTH, 0);
+        // cal.set(Calendar.DAY_OF_MONTH, 1);
+        // film.setAnneeSortie(cal.getTime());        
 
 
         //CREATION LISTE GENRES ASSOCIES A FILM

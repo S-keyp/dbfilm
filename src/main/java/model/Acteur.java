@@ -4,6 +4,8 @@ import java.util.List;
 
 import java.util.ArrayList;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,6 +15,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="Acteur.findActeur", query="SELECT f FROM Acteur f WHERE f.identite LIKE :identite"),
+})
 @JsonIgnoreProperties(value = {"height, roles"})
 public class Acteur {
 	@Id
