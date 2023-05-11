@@ -1,11 +1,11 @@
 package executable;
 
-import java.util.List;
+// import java.util.List;
 
-import Utils.JPAUtils;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
-import model.Film;
+// import Utils.JPAUtils;
+// import jakarta.persistence.EntityManager;
+// import jakarta.persistence.TypedQuery;
+// import model.Film;
 
 public class Menu {
     public static void main(String[] args) {

@@ -1,9 +1,11 @@
 package model;
 
-import java.util.Date;
 import java.util.List;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
@@ -20,7 +22,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="Film.findAll", query="SELECT f FROM Film f WHERE f.id = :id"),
+	@NamedQuery(name="Film.findFilm", query="SELECT f FROM Film f WHERE f.title LIKE :title"),
+	@NamedQuery(
+		name="Film.findFilmBetweenYears", 
+		query="SELECT f FROM Film f WHERE f.anneeSortie BETWEEN :date1 AND :date2"
+	),
+
+
+
 	@NamedQuery(name="Film.findAllFilmForActor", query="SELECT f FROM Film f WHERE f.id LIKE :id"), 
 })
 @JsonIgnoreProperties(value = { "castingPrincipal" })
@@ -55,19 +64,8 @@ public class Film {
 
 	private String langue;
 
-	private String anneeSortie;
+	private Date anneeSortie;
 
-	@JsonProperty("genres")
-    private void transformListToGenreList(List<String> noms) {
-        if (noms != null) {
-            for (String nom : noms) {
-                Genre genre = new Genre();
-                genre.setNom(nom);
-                genre.getFilms().add(this);
-                listGenres.add(genre);
-            }
-        }
-    }
 
 	public String getId() {
 		return id;
@@ -143,13 +141,31 @@ public class Film {
 		this.roles = roles;
 	}
 
-	public String getAnneeSortie() {
+	public Date getAnneeSortie() {
 		return anneeSortie;
 	}
 
 	public void setAnneeSortie(String anneeSortie) {
-		this.anneeSortie = anneeSortie;
+		if(anneeSortie.length() > 4) anneeSortie = anneeSortie.substring(0,4);
+		int dateSortieInt = Integer.parseInt(anneeSortie);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, dateSortieInt);
+        cal.set(Calendar.MONTH, 0);
+        cal.set(Calendar.DAY_OF_MONTH, 1);     
+		this.anneeSortie = cal.getTime();
 	}
+
+	@JsonProperty("genres")
+    private void transformListToGenreList(List<String> noms) {
+        if (noms != null) {
+            for (String nom : noms) {
+                Genre genre = new Genre();
+                genre.setNom(nom);
+                genre.getFilms().add(this);
+                listGenres.add(genre);
+            }
+        }
+    }
 
 	public List<Genre> getGenres() {
 		return listGenres;

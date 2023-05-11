@@ -4,7 +4,6 @@ import java.io.File;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import jakarta.persistence.EntityManager;
 import model.Film;
 import model.Role;
 

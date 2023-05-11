@@ -3,6 +3,8 @@ package model;
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.JoinColumn;
 
 import jakarta.persistence.CascadeType;
@@ -14,6 +16,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "Role.getRolesForActorId", query = "SELECT r FROM Role r WHERE r.acteur = :acteur"),
+	@NamedQuery(name = "Role.getRolesForFilm", query = "SELECT r FROM Role r WHERE r.film = :film"),
+})
 @JsonIgnoreProperties(value = {"film"})
 public class Role {
 	@Id
